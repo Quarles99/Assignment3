@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PokeTracker</string>
+    <string name="speciesDefault">Wild Horse Pokemon</string>
+    <string name="nameDefault">Glastrier</string>
+    <string name="nationNumberDefault">896</string>
+    <string name="weightDefault">800.0</string>
+    <string name="heightDefault">2.2</string>
+    <string name="hpDefault">0</string>
+    <string name="attackDefault">0</string>
+    <string name="defenseDefault">0</string>
+</resources>
