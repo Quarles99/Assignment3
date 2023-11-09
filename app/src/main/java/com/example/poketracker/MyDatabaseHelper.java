@@ -16,13 +16,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_MY_DATA_TABLE = "CREATE TABLE " + MyDataContract.MyDataEntry.TABLE_NAME + " (" +
                 MyDataContract.MyDataEntry._ID + " INTEGER PRIMARY KEY, " +
-                MyDataContract.MyDataEntry.POP_NAME + " TEXT NOT NULL, " +
-                MyDataContract.MyDataEntry.POP_NUMBER + " INTEGER NOT NULL, " +
-                MyDataContract.MyDataEntry.POP_TYPE + " TEXT, " +
-                MyDataContract.MyDataEntry.FANDOM + " TEXT, " +
-                MyDataContract.MyDataEntry.ON + " INTEGER, " +
-                MyDataContract.MyDataEntry.ULTIMATE + " TEXT, " +
-                MyDataContract.MyDataEntry.PRICE + " REAL NOT NULL);";
+                MyDataContract.MyDataEntry.NAME + " TEXT NOT NULL, " +
+                MyDataContract.MyDataEntry.NATIONAL_NUMBER + " INTEGER NOT NULL, " +
+                MyDataContract.MyDataEntry.SPECIES + " TEXT, " +
+                MyDataContract.MyDataEntry.HEIGHT + " FLOAT, " +
+                MyDataContract.MyDataEntry.WEIGHT + " FLOAT, " +
+                MyDataContract.MyDataEntry.HP + " INTEGER, " +
+                MyDataContract.MyDataEntry.ATTACK + " REAL NOT NULL, " +
+                MyDataContract.MyDataEntry.DEFENSE + "INTEGER, );";
 
         db.execSQL(SQL_CREATE_MY_DATA_TABLE);
     }
