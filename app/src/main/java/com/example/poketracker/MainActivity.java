@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     Button submitButton;
     Button resetButton;
     String level;
+
+    List<PokeData> data;
 
     View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
@@ -187,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Submit Verification
-            if(allPass == true){
+            if(allPass){
                 Toast.makeText(getApplicationContext(), "Pokemon data stored in the Pokedex.", Toast.LENGTH_LONG).show();
             }
 
@@ -199,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.constraint);
 
+        data = new ArrayList<>();
         nationalNumberInput = findViewById(R.id.nationalNumberInput);
         nationalNumberInput.setText(R.string.nationNumberDefault);
         nameInput = findViewById(R.id.nameInput);
