@@ -39,24 +39,24 @@ public class MyTableAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.table_row, null);
         }
 
-        TextView textViewID = convertView.findViewById(R.id.textViewID);
-        TextView textViewName = convertView.findViewById(R.id.textViewName);
         TextView textViewNumber = convertView.findViewById(R.id.textViewNumber);
-        TextView textViewType = convertView.findViewById(R.id.textViewType);
-        TextView textViewFandom = convertView.findViewById(R.id.textViewFandom);
-        TextView textViewOn = convertView.findViewById(R.id.textViewOn);
-        TextView textViewUltimate = convertView.findViewById(R.id.textViewUltimate);
-        TextView textViewPrice = convertView.findViewById(R.id.textViewPrice);
+        TextView textViewName = convertView.findViewById(R.id.textViewName);
+        TextView textViewSpecies = convertView.findViewById(R.id.textViewSpecies);
+        TextView textViewHeight = convertView.findViewById(R.id.textViewHeight);
+        TextView textViewWeight = convertView.findViewById(R.id.textViewWeight);
+        TextView textViewHP = convertView.findViewById(R.id.textViewHP);
+        TextView textViewAttack = convertView.findViewById(R.id.textViewAttack);
+        TextView textViewDefense = convertView.findViewById(R.id.textViewDefense);
 
         PokeData item = data.get(position);
         textViewName.setText(item.getName());
         textViewNumber.setText(String.valueOf(item.getNumber()));
-        textViewID.setText(String.valueOf(item.getId()));
-        textViewType.setText(item.getPopType());
-        textViewFandom.setText(item.getFandom());
-        textViewOn.setText(String.valueOf(item.getHP()));
-        textViewUltimate.setText(item.getUltimate());
-        textViewPrice.setText(String.valueOf(item.getPrice()));
+        textViewSpecies.setText(String.valueOf(item.getSpecies()));
+        textViewHeight.setText(item.getHeight().toString());
+        textViewWeight.setText(item.getWeight().toString());
+        textViewHP.setText(String.valueOf(item.getHP()));
+        textViewAttack.setText(item.getAttack());
+        textViewDefense.setText(String.valueOf(item.getDefense()));
 
 
         // Set data for other columns
