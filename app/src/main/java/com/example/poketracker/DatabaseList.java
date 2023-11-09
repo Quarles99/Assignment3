@@ -1,6 +1,7 @@
 package com.example.poketracker;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,32 +9,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class DatabaseList extends MainActivity{
-    Dialog dialog;
+import java.util.List;
 
-    View.OnClickListener openDatabaseListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            dialog.show();
-        }
-    };
+public class DatabaseList{
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.constraint);
+    public static void showDialog(Context context, MyTableAdapter adapter, List<PokeData> data) {
 
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_layout, null);
-        Button openDatabaseButton = findViewById(R.id.databaseButton);
-        openDatabaseButton.setOnClickListener(openDatabaseListener);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_layout, null);
 
-        dialog = new Dialog(this);
+        Dialog dialog = new Dialog(context);
         dialog.setContentView(dialogView);
 
         ListView listView = dialogView.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-
+        dialog.show();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             // Handle item click

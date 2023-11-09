@@ -27,15 +27,20 @@ public class MainActivity extends AppCompatActivity {
     EditText hpInput;
     EditText attackInput;
     EditText defenseInput;
-    ArrayList<String> levelList = new ArrayList<>();
     RadioButton gender1;
     RadioButton gender2;
     RadioButton gender3;
     Button submitButton;
-    Button resetButton;
-
+    Button openDatabaseButton;
     List<PokeData> data;
     MyTableAdapter adapter;
+
+    View.OnClickListener openDatabaseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            DatabaseList.showDialog(MainActivity.this, adapter, data);
+        }
+    };
 
     View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
@@ -210,37 +215,9 @@ public class MainActivity extends AppCompatActivity {
         defenseInput = findViewById(R.id.Defense);
         defenseInput.setText(R.string.defenseDefault);
         submitButton = findViewById(R.id.submitButton);
-
-        for(int i = 1; i < 51; i++){
-            levelList.add(i + "");
-        }
-
         submitButton.setOnClickListener(submitListener);
+        openDatabaseButton = findViewById(R.id.databaseButton);
+        openDatabaseButton.setOnClickListener(openDatabaseListener);
     }
 
-    View.OnClickListener resetListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            nationalNumberInput.setText(getResources().getString(R.string.nationNumberDefault));
-            nationalNumberInput.setTextColor(Color.BLACK);
-            nameInput.setText(getResources().getString(R.string.nameDefault));
-            nameInput.setTextColor(Color.BLACK);
-            speciesInput.setText(getResources().getString(R.string.speciesDefault));
-            speciesInput.setTextColor(Color.BLACK);
-            heightInput.setText(getResources().getString(R.string.heightDefault));
-            heightInput.setTextColor(Color.BLACK);
-            weightInput.setText(getResources().getString(R.string.weightDefault));
-            weightInput.setTextColor(Color.BLACK);
-            hpInput.setText(getResources().getString(R.string.hpDefault));
-            hpInput.setTextColor(Color.BLACK);
-            attackInput.setText(getResources().getString(R.string.attackDefault));
-            attackInput.setTextColor(Color.BLACK);
-            defenseInput.setText(getResources().getString(R.string.defenseDefault));
-            defenseInput.setTextColor(Color.BLACK);
-            gender1.setChecked(false);
-            gender2.setChecked(false);
-            gender3.setChecked(false);
-
-        }
-    };
 }

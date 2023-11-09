@@ -55,7 +55,7 @@ public class MyTableAdapter extends BaseAdapter {
         textViewHeight.setText(item.getHeight().toString());
         textViewWeight.setText(item.getWeight().toString());
         textViewHP.setText(String.valueOf(item.getHP()));
-        textViewAttack.setText(item.getAttack());
+        textViewAttack.setText(String.valueOf(item.getAttack()));
         textViewDefense.setText(String.valueOf(item.getDefense()));
 
 
