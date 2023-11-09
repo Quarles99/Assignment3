@@ -39,7 +39,7 @@ public class MyTableAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.table_row, null);
         }
 
-        TextView textViewNumber = convertView.findViewById(R.id.textViewNumber);
+        TextView textViewNumber = convertView.findViewById(R.id.textViewNN);
         TextView textViewName = convertView.findViewById(R.id.textViewName);
         TextView textViewSpecies = convertView.findViewById(R.id.textViewSpecies);
         TextView textViewHeight = convertView.findViewById(R.id.textViewHeight);

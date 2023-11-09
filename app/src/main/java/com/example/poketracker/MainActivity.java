@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     EditText speciesInput;
     EditText heightInput;
     EditText weightInput;
-    Spinner levelSpinner;
+    EditText level;
     EditText hpInput;
     EditText attackInput;
     EditText defenseInput;
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
     RadioButton gender3;
     Button submitButton;
     Button resetButton;
-    String level;
 
     List<PokeData> data;
+    MyTableAdapter adapter;
 
     View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             boolean check7 = false;
             boolean check8 = false;
 
+
             int nationalNumber = Integer.parseInt(nationalNumberInput.getText().toString());
             String name = nameInput.getText().toString();
             String species = speciesInput.getText().toString();
@@ -59,14 +60,6 @@ public class MainActivity extends AppCompatActivity {
             int attack = Integer.parseInt(attackInput.getText().toString());
             int defense = Integer.parseInt(defenseInput.getText().toString());
 
-            String gender = "";
-            if(gender1.isChecked()){
-                gender = "Male";
-            } else if(gender2.isChecked()){
-                gender = "Female";
-            } else if(gender3.isChecked()){
-                gender = "Unknown";
-            }
 
             //Check 1
             if(nationalNumber != (Integer.parseInt(getResources().getString(R.string.nationNumberDefault))) &&
@@ -75,18 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 !height.equals(Float.parseFloat(getResources().getString(R.string.heightDefault))) &&
                 !weight.equals(Float.parseFloat(getResources().getString(R.string.weightDefault))) &&
                 hp != 0 && attack != 0 && defense != 0 &&
-                levelSpinner.getSelectedItem() != null &&
-                (gender1.isChecked() ||
-                gender2.isChecked() ||
-                gender3.isChecked())){
+                Integer.parseInt(level.getText().toString()) >= 0){
                     check1 = true;
             } else{
-                /*System.out.println(nationalNumber);
-                System.out.println(Integer.parseInt(getResources().getString(R.string.nationNumberDefault)));
-                System.out.println(name);
-                System.out.println(getResources().getString(R.string.nameDefault));
-                System.out.println(height);
-                System.out.println(Float.parseFloat(getResources().getString(R.string.heightDefault)));*/
                 Toast.makeText(getApplicationContext(), "One or more fields has not been filled out.", Toast.LENGTH_LONG).show();
             }
 
@@ -126,13 +110,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Check 3
-            if(gender.equals("Male") || gender.equals("Female") || gender.equals("Unknown")){
+            check3 = true;
+/*            if(gender.equals("Male") || gender.equals("Female") || gender.equals("Unknown")){
                 check3 = true;
             } else{
                 Toast.makeText(getApplicationContext(),
                 "Please choose a gender.",
                  Toast.LENGTH_LONG).show();
-            }
+            }*/
 
             //Check 4
             if(hp >= 1 && hp <= 362){
@@ -191,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
 
             //Submit Verification
             if(allPass){
+                PokeData newPokemon = new PokeData(nationalNumber, name, species, height, weight, hp, attack, defense);
+                data.add(newPokemon);
+                adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Pokemon data stored in the Pokedex.", Toast.LENGTH_LONG).show();
             }
 
@@ -203,52 +191,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.constraint);
 
         data = new ArrayList<>();
-        nationalNumberInput = findViewById(R.id.nationalNumberInput);
+        adapter = new MyTableAdapter(this, data);
+        nationalNumberInput = findViewById(R.id.NationalNumber);
         nationalNumberInput.setText(R.string.nationNumberDefault);
-        nameInput = findViewById(R.id.nameInput);
+        nameInput = findViewById(R.id.Name);
         nameInput.setText(R.string.nameDefault);
-        speciesInput = findViewById(R.id.speciesInput);
+        speciesInput = findViewById(R.id.Species);
         speciesInput.setText(R.string.speciesDefault);
-        heightInput = findViewById(R.id.heightInput);
+        heightInput = findViewById(R.id.Height);
         heightInput.setText(R.string.heightDefault);
-        weightInput = findViewById(R.id.weightInput);
+        weightInput = findViewById(R.id.Weight);
         weightInput.setText(R.string.weightDefault);
-        levelSpinner = findViewById(R.id.levelSpinner);
-        hpInput = findViewById(R.id.hpInput);
+        level = findViewById(R.id.Level);
+        hpInput = findViewById(R.id.HP);
         hpInput.setText(R.string.hpDefault);
-        attackInput = findViewById(R.id.attackInput);
+        attackInput = findViewById(R.id.Attack);
         attackInput.setText(R.string.attackDefault);
-        defenseInput = findViewById(R.id.defenseInput);
+        defenseInput = findViewById(R.id.Defense);
         defenseInput.setText(R.string.defenseDefault);
-        gender1 = findViewById(R.id.gender1);
-        gender2 = findViewById(R.id.gender2);
-        gender3 = findViewById(R.id.gender3);
         submitButton = findViewById(R.id.submitButton);
-        resetButton = findViewById(R.id.resetButton);
 
         for(int i = 1; i < 51; i++){
             levelList.add(i + "");
         }
 
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, levelList);
-        levelSpinner.setAdapter(typeAdapter);
-        levelSpinner.setOnItemSelectedListener(spinListener);
-
         submitButton.setOnClickListener(submitListener);
-        resetButton.setOnClickListener(resetListener);
     }
-
-    AdapterView.OnItemSelectedListener spinListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-            level = parent.getItemAtPosition(position).toString();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
 
     View.OnClickListener resetListener = new View.OnClickListener() {
         @Override

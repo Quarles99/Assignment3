@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "FunkoPop.db";
+    private static final String DATABASE_NAME = "PokeTracker.db";
     private static final int DATABASE_VERSION = 1;
 
     public MyDatabaseHelper(Context context) {
@@ -15,7 +15,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_MY_DATA_TABLE = "CREATE TABLE " + MyDataContract.MyDataEntry.TABLE_NAME + " (" +
-                MyDataContract.MyDataEntry._ID + " INTEGER PRIMARY KEY, " +
                 MyDataContract.MyDataEntry.NAME + " TEXT NOT NULL, " +
                 MyDataContract.MyDataEntry.NATIONAL_NUMBER + " INTEGER NOT NULL, " +
                 MyDataContract.MyDataEntry.SPECIES + " TEXT, " +
@@ -30,6 +29,5 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Handle database upgrades here
     }
 }
